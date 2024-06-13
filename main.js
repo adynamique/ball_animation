@@ -7,8 +7,14 @@ let canvas = document.querySelector("canvas");
         canvas.style.border="1px solid black";
         
         let ballradius = 10;
-        let posY = 10;
-        let posX = 100;
+        function random_range(min, max){
+            let rand = Math.random();
+            let result = Math.floor(rand*(max-min)+min);
+            return result;
+        }
+
+        let posY = random_range(1+ballradius,canvas.height-ballradius);
+        let posX = random_range(1+ballradius,canvas.width-ballradius);
         //speed => the number of pixels wich the ball will be moved 
         let speedY = 4;
         let speedX = 5;
@@ -36,7 +42,7 @@ let canvas = document.querySelector("canvas");
                 speedY*=-1
             }
             /*reverse the horizontal speed so the circle goes righ/left when it hits the border*/
-            if(1+posX+ballradius*2>=canvas.width||posX-ballradius==0){
+            if(1+posX+ballradius>=canvas.width||1+posX-ballradius<=0){
                 speedX*=-1
             }
 
