@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>bola negra</title>
+    </head>
+    <body>
+        <canvas></canvas>
+
+        <!-- all the program is contained in the script, 
+        css properties were not used since they can stretch the canvas and make the drawings look blurry-->
+        <script>
+        let canvas = document.querySelector("canvas");
+        let ctx = canvas.getContext("2d");
+
+        canvas.width=400;
+        canvas.height=200;
+        canvas.style.border="1px solid black";
+        
+        let ballradius = 10;
+        let posY = 10;
+        let posX = 100;
+        let speedY = 2;
+        let speedX = 9;
+        acceleration=2
+
+        let interval = setInterval(animate, 1000/31);
+        ctx.strokeStyle="blue";
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            ctx.beginPath()
+            ctx.arc(posX,posY,ballradius,0,Math.PI*2)
+            ctx.stroke()
+            ctx.closePath()
+            if(1+posY+ballradius>=canvas.height||1+posY-ballradius<=0){
+                speedY*=-1
+            }
+            if(1+posX+ballradius>=canvas.width||1+posX-ballradius<=0){speedX*=-1}
+            if(speedY==0 && 1+posY+ballradius>=canvas.height){acceleration=0; clearInterval(interval)}
+            speedY=speedY+=acceleration
+            posY=posY+speedY;
+            posX=posX+speedX
+            console.log(`speed = ${speedY}, posY=${posY}`)
+        }
+
+
+
+    
+        </script>
+    </body>
+</html>
+
